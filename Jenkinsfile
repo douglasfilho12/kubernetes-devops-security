@@ -15,7 +15,7 @@ pipeline {
         } 
       stage('SonarQube Analysis') {
            steps { 
-             withSonarQubeEnv() {
+             withSonarQubeEnv(installationName: 'Sonarqube1') {
                 sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
              }
            }  
