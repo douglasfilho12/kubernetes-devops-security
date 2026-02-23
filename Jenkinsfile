@@ -18,6 +18,9 @@ pipeline {
              withSonarQubeEnv(installationName: 'Sonarqube1') {
                 sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
              }
+             timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+             }
            }  
   }
        stage('Docker Build and Push') {
