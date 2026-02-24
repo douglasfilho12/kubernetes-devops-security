@@ -46,6 +46,28 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
+			<plugin>
+            	<groupId>org.owasp</groupId>
+            	<artifactId>dependency-check-maven</artifactId>
+            	<version>12.1.6</version> <!-- Use the latest version from the Maven Repository -->
+            	<configuration>
+                <!-- Optional configuration to fail the build on a specific CVSS score threshold -->
+                		<failBuildOnCVSS>5.0</failBuildOnCVSS>
+                		<!-- Optional configuration to generate an HTML report -->
+                		<formats>
+                    		<format>ALL</format>
+                		</formats>
+                <!-- Optional: data directory for NVD database caching (useful for CI/CD) -->
+                <!-- <dataDirectory>/tmp/owasp</dataDirectory> -->
+            	</configuration>
+           	    <executions>
+                		<execution>
+                    		<goals>
+                        		<goal>check</goal>
+                    		</goals>
+                		</execution>
+            	</executions>
+        	</plugin>
 		</plugins>
 	</build>
 

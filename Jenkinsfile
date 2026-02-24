@@ -13,7 +13,7 @@ pipeline {
               sh "mvn test"
             }
         } 
-      stage('SonarQube Analysis') {
+      stage('SonarQube SAST') {
            steps { 
              withSonarQubeEnv(installationName: 'Sonarqube1') {
                 sh "mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
@@ -23,6 +23,16 @@ pipeline {
              }
            }  
   }
+       stage('Vulnerability Scan') {
+            steps {
+              sh "mvn dependency-check:check"
+            }
+            post {
+              always {
+                dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+              }
+            }
+      }
        stage('Docker Build and Push') {
             steps {
               withDockerRegistry([credentialsId: 'docker-hub', url: '']) {
