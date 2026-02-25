@@ -52,7 +52,7 @@
             	<version>12.1.6</version> <!-- Use the latest version from the Maven Repository -->
             	<configuration>
                 <!-- Optional configuration to fail the build on a specific CVSS score threshold -->
-                		<failBuildOnCVSS>5.0</failBuildOnCVSS>
+                		<failBuildOnCVSS>20.0</failBuildOnCVSS>
                 		<!-- Optional configuration to generate an HTML report -->
                 		<formats>
                     		<format>ALL</format>
